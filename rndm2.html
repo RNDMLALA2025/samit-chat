@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNDM GAMES 2025 LALA GRP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        .logo {
+            margin: 20px 0;
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .profile {
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>RNDM GAMES 2025 LALA GRP</h1>
+    <p>by Mhd Saif and Ahmed Lala</p>
+    <img src="https://via.placeholder.com/150" alt="RNDM Game Logo" class="logo">
+
+    <button class="button" id="signInButton">Sign In</button>
+    <div id="signInForm" class="hidden">
+        <p>Enter your email and RNDM code:</p>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <input type="password" id="code" placeholder="Enter RNDM code" required>
+        <button class="button" id="submitButton">Submit</button>
+    </div>
+
+    <div id="profile" class="hidden profile">
+        <h2>Welcome!</h2>
+        <p id="userInfo"></p>
+        <p>Today's Date: <span id="currentDate"></span></p>
+    </div>
+
+    <button class="button" id="moreInfoButton">For More Info</button>
+    <p id="moreInfo" class="hidden">This group was made for Lala.</p>
+
+    <footer>
+        <p>Contact us at: rndmgames9@gmail.com</p>
+    </footer>
+
+    <script>
+        const signInButton = document.getElementById('signInButton');
+        const signInForm = document.getElementById('signInForm');
+        const submitButton = document.getElementById('submitButton');
+        const profile = document.getElementById('profile');
+        const userInfo = document.getElementById('userInfo');
+        const currentDate = document.getElementById('currentDate');
+        const moreInfoButton = document.getElementById('moreInfoButton');
+        const moreInfo = document.getElementById('moreInfo');
+
+        signInButton.addEventListener('click', () => {
+            signInForm.classList.toggle('hidden');
+        });
+
+        submitButton.addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const code = document.getElementById('code').value;
+
+            if (code === '4369') {
+                userInfo.textContent = `Email: ${email}`;
+                const date = new Date();
+                currentDate.textContent = date.toDateString();
+                profile.classList.remove('hidden');
+                signInForm.classList.add('hidden');
+            } else {
+                alert('Invalid RNDM code!');
+            }
+        });
+
+        moreInfoButton.addEventListener('click', () => {
+            moreInfo.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

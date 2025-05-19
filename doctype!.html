@@ -1,0 +1,563 @@
+<doctype! html>
+<html dir="ltr" lang="en"><head>
+  <meta charset="utf-8">
+  <title>gpilot</title>
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <script src="/strings.m.js" type="module"></script>
+  <style>
+  @font-face {
+    font-family: Ginto;
+    src: url("edge://discover-chat-v2/Ginto-Copilot-Upright-Variable.woff2") format("woff2"),
+  }
+
+  :root {
+    --color-stone-100: #fefcfb;
+    --color-stone-200: #f4efed;
+    --color-stone-300: #ccc4c0;
+    --color-stone-400: #968f8c;
+    --color-stone-450: #7b7572;
+    --color-stone-750: #33302e;
+    --color-stone-800: #282523;
+    --color-stone-850: #1d1b1a;
+    --color-stone-900: #131110;
+    --color-saddle-150: #fff9f4;
+    --color-saddle-250: #f2ddcc;
+    --color-saddle-300: #e3cbbc;
+    --color-saddle-350: #bba5a0;
+    --color-saddle-600: #604d4f;
+    --color-saddle-650: #524144;
+    --color-saddle-700: #463739;
+    --color-saddle-750: #392d2e;
+    --color-midnight-650: #2c3a63;
+    --color-midnight-900: #0c101c;
+    --color-neutral-900: #111111;
+    --color-slate-150: #f0f1f5;
+    --color-slate-200: #e4e6f1;
+    --color-slate-250: #cfd8ec;
+    --color-acrylic-default-fallback-light: #fefbf8;
+    --color-acrylic-default-fallback-dark: #1b2336;
+    --colorLayerBackgroundApp: #F2F4F7;
+    --Static-Color-Green-400: #4BA849;
+    --Static-Color-Neutral-White: #ffffff;
+    --Static-Color-Overlay-White-20: #ffffff33;
+    --Static-Color-Background-White-70: #ffffffb3;
+    --Static-Color-Background-White-60: #ffffff99;
+    --Static-Color-Background-White-18: #ffffff2e;
+    --Static-Color-Background-White-5: #ffffff0d;
+    --Static-Color-Background-Slate-750-65: #1f2330a6;
+    --Static-Color-Background-Slate-700-65: #282f42a6;
+    --Static-Color-Background-Slate-650-65: #313a52a6;
+
+    --Theme-Color-Foreground-Primary-900: var(--color-stone-900);
+    --Theme-Color-Foreground-Primary-750: var(--color-stone-750);
+    --Theme-Color-Foreground-Secondary-350: #b1aaa6;
+    --Theme-Color-Background-100: var(--color-stone-100);
+    --Theme-Color-Background-Black-5: #ffffff0d;
+    --Theme-Color-Background-White-40: #ffffff66;
+    --Theme-Color-Overlay-Black-20: #00000033;
+    --Theme-Color-Overlay-Black-12: #0000001f;
+    --Theme-Color-Overlay-Black-60: #00000099;
+    --Theme-Color-Overlay-Screen: #635e5a40;
+    --Theme-Color-Background-Modal-Fallback: var(--color-saddle-150);
+    --Theme-Color-Background-Acrylic-Default-Fallback: var(--color-acrylic-default-fallback-light);
+    --Theme-Color-Effect-Shadow-Small: 0px 0.5px 3px 0px rgba(0, 0, 0, 0.2), 0px 0.5px 0.5px 0.5px rgba(255, 255, 255, 1) inset;
+    --Theme-Color-Effect-Shadow-Medium: 0px 6px 12px 0px rgba(0, 0, 0, 0.08);
+    --Theme-Color-Component-Button-Strong-Background-Rest: var(--color-stone-850);
+    --Theme-Color-Component-Button-Strong-Background-Hover: var(--color-neutral-900);
+    --Theme-Color-Component-Button-Strong-Background-Pressed: var(--color-stone-800);
+    --Theme-Color-Component-Button-Strong-Background-Disabled: var(--Theme-Color-Background-Black-5);
+    --Theme-Color-Component-Button-Strong-Foreground-Rest: var(--color-stone-200);
+    --Theme-Color-Component-Button-Strong-Foreground-Hover: var(--color-stone-200);
+    --Theme-Color-Component-Button-Strong-Foreground-Pressed: var(--color-stone-300);
+    --Theme-Color-Component-Button-Strong-Foreground-Disabled: var(--color-stone-400);
+    --Theme-Color-Component-Button-Default-Background-Rest: var(--Static-Color-Background-White-70);
+    --Theme-Color-Component-Button-Default-Background-Hover: var(--Static-Color-Neutral-White);
+    --Theme-Color-Component-Button-Default-Background-Pressed: var(--Static-Color-Background-White-60);
+    --Theme-Color-Component-Button-Default-Background-Disabled: var(--Theme-Color-Background-Black-5);
+    --Theme-Color-Component-Button-Default-Foreground-Rest: var(--color-stone-750);
+    --Theme-Color-Component-Button-Default-Foreground-Hover: var(--color-stone-750);
+    --Theme-Color-Component-Button-Default-Foreground-Pressed: var(--color-stone-450);
+    --Theme-Color-Component-Button-Default-Foreground-Disabled: var(--color-stone-400);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --colorLayerBackgroundApp: #141414;
+      --Theme-Color-Foreground-Primary-900: var(--color-saddle-150);
+      --Theme-Color-Foreground-Primary-750: var(--color-saddle-300);
+      --Theme-Color-Foreground-Secondary-350: #505b7b;
+      --Theme-Color-Background-100: var(--color-midnight-900);
+      --Theme-Color-Background-Black-5: #ffffff0d;
+      --Theme-Color-Background-White-40: #00000066;
+      --Theme-Color-Overlay-Black-20: #ffffff33;
+      --Theme-Color-Overlay-Black-60: #ffffff99;
+      --Theme-Color-Background-Modal-Fallback: var(--color-midnight-650);
+      --Theme-Color-Background-Acrylic-Default-Fallback: var(--color-acrylic-default-fallback-dark);
+      --Theme-Color-Effect-Shadow-Small: 0px 0.5px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 0.5px 0px rgba(255, 255, 255, 0.12) inset;
+      --Theme-Color-Effect-Shadow-Medium: 0px 6px 12px 0px rgba(0, 0, 0, 0.18);
+      --Theme-Color-Component-Button-Strong-Background-Rest: var(--color-slate-200);
+      --Theme-Color-Component-Button-Strong-Background-Hover: var(--color-slate-150);
+      --Theme-Color-Component-Button-Strong-Background-Pressed: var(--color-slate-250);
+      --Theme-Color-Component-Button-Strong-Background-Disabled: var(--Theme-Color-Background-Black-5);
+      --Theme-Color-Component-Button-Strong-Foreground-Rest: var(--color-saddle-750);
+      --Theme-Color-Component-Button-Strong-Foreground-Hover: var(--color-saddle-750);
+      --Theme-Color-Component-Button-Strong-Foreground-Pressed: var(--color-saddle-650);
+      --Theme-Color-Component-Button-Strong-Foreground-Disabled: var(--color-saddle-600);
+      --Theme-Color-Component-Button-Default-Background-Rest: var(--Static-Color-Background-Slate-700-65);
+      --Theme-Color-Component-Button-Default-Background-Hover: var(--Static-Color-Background-Slate-650-65);
+      --Theme-Color-Component-Button-Default-Background-Pressed: var(--Static-Color-Background-Slate-750-65);
+      --Theme-Color-Component-Button-Default-Background-Disabled: var(--Static-Color-Background-White-5);
+      --Theme-Color-Component-Button-Default-Foreground-Rest: var(--color-saddle-250);
+      --Theme-Color-Component-Button-Default-Foreground-Hover: var(--color-saddle-250);
+      --Theme-Color-Component-Button-Default-Foreground-Pressed: var(--color-saddle-350);
+      --Theme-Color-Component-Button-Default-Foreground-Disabled: var(--color-saddle-250);
+    }
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--colorLayerBackgroundApp);
+    font-family: Ginto, ui-sans-serif, system-ui, sans-serif;
+  }
+
+  iframe {
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+  }
+  .overlay {
+    /* hidden by default - display updated when dialog shown */
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: var(--Theme-Color-Overlay-Screen);
+    z-index: 999;
+  }
+  .dialog {
+    /* hidden by default - display updated when needed */
+    display: none;
+    position: absolute;
+    visibility: visible;
+    bottom: 16px;
+    left: 8px;
+    right: 8px;
+    z-index: 1000;
+    border-radius: 28px;
+    background-color: var(--Theme-Color-Background-Modal-Fallback);
+    overflow: overlay;
+    box-shadow:
+      0px 0px 8px 0px rgba(0, 0, 0, 0.04),
+      0px 32px 64px 0px rgba(0, 0, 0, 0.12),
+  }
+  .dialog-container {
+    padding-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+    row-gap: 28px;
+    display: flex;
+    flex-direction: column;
+    @media (forced-colors: active) {
+      border-radius: 28px;
+      border: 1px solid ButtonText;
+      color: CanvasText;
+    }
+  }
+  .upper-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+  .header-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+  }
+  .icons-container {
+    display: grid;
+    justify-content: center;
+  }
+  .icon {
+    grid-column: 1;
+    grid-row: 1;
+    border-radius: 50%;
+    border: 2px solid var(--Theme-Color-Overlay-Black-12);
+    background-color: var(--Static-Color-Neutral-White);
+    display: flex;
+    justify-content: center;
+  }
+  .profile-icon {
+    transform: translateX(-32%);
+    z-index: 1001;
+  }
+  .copilot-icon {
+    transform: translateX(32%);
+    z-index: 1002;
+  }
+  .copilot-svg {
+    margin-top: 6px;
+    margin-left: 6px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 440;
+    text-align: center;
+    line-height: 31px;
+    margin: 0;
+    color: var(--Theme-Color-Foreground-Primary-900);
+  }
+  .description {
+    font-size: 17px;
+    font-weight: 410;
+    text-align: center;
+    line-height: 26px;
+    color: var(--Theme-Color-Foreground-Primary-750);
+  }
+  .toggle-label {
+    color: var(--Theme-Color-Foreground-Primary-900);
+    line-height: 24px;
+    @media (forced-colors: active) {
+      color: ButtonText;
+    }
+  }
+  .toggle-sublabel {
+    font-size: 14px;
+    font-weight: 410;
+    line-height: 20px;
+    color: var(--Theme-Color-Foreground-Primary-900);
+    padding-top: 4px;
+    @media (forced-colors: active) {
+      color: CanvasText;
+    }
+  }
+  .label-wrapper {
+    column-gap: 4px;
+    max-width: calc(100% - 40px);
+  }
+  .agent-toggle-container {
+    display: none;
+  }
+  .agent-and-profile-toggle-container {
+    display: flex;
+    margin-top: 12px;
+  }
+  .toggle-wrapper {
+    position: relative;
+    width: 40px;
+    height: 24px;
+  }
+  .toggle-wrapper:hover .toggle-switch:not([disabled]) + .toggle-background + .toggle-circle {
+    width: 22px;
+    height: 22px;
+    bottom: 1px;
+    left: 1px;
+  }
+  .toggle-wrapper:active .toggle-switch:not([disabled]) + .toggle-background + .toggle-circle {
+    width: 24px;
+    height: 20px;
+    bottom: 2px;
+    left: 2px;
+  }
+  .toggle-switch:focus-visible + .toggle-background {
+    outline: 2px solid var(--Theme-Color-Foreground-Primary-750);
+    outline-offset: 1px;
+    @media (forced-colors: active) {
+      outline-color: Highlight;
+    }
+  }
+  .toggle-background {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--Theme-Color-Overlay-Black-20);
+    border-radius: 24px;
+    @media (forced-colors: active) {
+      border: 1px solid ButtonText;
+      background-color: Canvas;
+    }
+  }
+  .toggle-circle {
+    position: absolute;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    bottom: 2px;
+    left: 2px;
+    background-color: var(--Static-Color-Neutral-White);
+    box-shadow:
+      0px 3px 1px 0px rgba(0, 0, 0, 0.06),
+      0px 3px 8px 0px rgba(0, 0, 0, 0.15),
+      0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 9999px;
+    transition: transform .4s;
+    @media (forced-colors: active) {
+      background-color: ButtonText;
+    }
+  }
+  .toggle-switch {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .toggle-switch:checked + .toggle-background + .toggle-circle {
+    transform: translateX(16px);
+    @media (forced-colors: active) {
+      background-color: HighlightText;
+    }
+  }
+  .toggle-wrapper:active .toggle-switch:checked:not([disabled]) + .toggle-background + .toggle-circle {
+    left: -2px;
+  }
+  .toggle-switch:checked:not([disabled]) + .toggle-background {
+    background-color: var(--Static-Color-Green-400);
+    @media (forced-colors: active) {
+      background-color: Highlight;
+      border-color: Highlight;
+    }
+  }
+  .toggle-switch[disabled] + .toggle-background {
+    @media (forced-colors: active) {
+      border-color: GrayText;
+    }
+  }
+  .toggle-switch[disabled] + .toggle-background + .toggle-circle {
+    background-color: var(--Theme-Color-Background-White-40);
+    @media (forced-colors: active) {
+      background-color: GrayText;
+    }
+  }
+  .toggle-row {
+    display: flex;
+    justify-content: space-between;
+    min-height: 40px;
+    font-size: 15px;
+    font-weight: 410;
+  }
+  .lower-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+  .base-button {
+    display: block;
+    border: none;
+    cursor: pointer;
+    border-radius: 24px;
+    height: 48px;
+    width: 100%;
+    box-shadow: var(--Theme-Color-Effect-Shadow-Small);
+    font-size: 17px;
+    font-weight: 410;
+    font-family: Ginto, ui-sans-serif, system-ui, sans-serif;
+    @media (forced-colors: active) {
+      box-shadow: none;
+    }
+  }
+  .primary-button {
+    background-color: var(--Theme-Color-Component-Button-Strong-Background-Rest);
+    color: var(--Theme-Color-Component-Button-Strong-Foreground-Rest);
+    @media (forced-colors: active) {
+      background-color: Highlight;
+      color: HighlightText;
+      forced-color-adjust: none;
+    }
+  }
+  .primary-button:hover {
+    background-color: var(--Theme-Color-Component-Button-Strong-Background-Hover);
+    color: var(--Theme-Color-Component-Button-Strong-Foreground-Hover);
+    @media (forced-colors: active) {
+      border: 1px solid Highlight;
+      background-color: HighlightText;
+      color: Highlight;
+    }
+  }
+  .primary-button:active {
+    background-color: var(--Theme-Color-Component-Button-Strong-Background-Pressed);
+    color: var(--Theme-Color-Component-Button-Strong-Foreground-Pressed);
+    @media (forced-colors: active) {
+      border: 1px solid Highlight;
+      background-color: Canvas;
+      color: ButtonText;
+    }
+  }
+  .primary-button:focus-visible {
+    outline: 2px solid var(--Theme-Color-Foreground-Primary-750);
+    outline-offset: 1px;
+    @media (forced-colors: active) {
+      outline-color: Highlight;
+    }
+  }
+  .primary-button:disabled {
+    background-color: var(--Theme-Color-Component-Button-Strong-Background-Disabled);
+    color: var(--Theme-Color-Component-Button-Strong-Foreground-Disabled);
+    cursor: default;
+    @media (forced-colors: active) {
+      color: GrayText !important;
+      border: 1px solid GrayText !important;
+      background-color: Canvas;
+    }
+  }
+  .secondary-button {
+    background-color: var(--Theme-Color-Component-Button-Default-Background-Rest);
+    color: var(--Theme-Color-Component-Button-Default-Foreground-Rest);
+    @media (forced-colors: active) {
+      border: 1px solid ButtonText;
+      background-color: ButtonFace;
+      color: ButtonText;
+      forced-color-adjust: none;
+    }
+  }
+  .secondary-button:hover {
+    background-color: var(--Theme-Color-Component-Button-Default-Background-Hover);
+    color: var(--Theme-Color-Component-Button-Default-Foreground-Hover);
+    @media (forced-colors: active) {
+      border: 1px solid Highlight;
+      background-color: HighlightText;
+      color: Highlight;
+    }
+  }
+  .secondary-button:active {
+    background-color: var(--Theme-Color-Component-Button-Default-Background-Pressed);
+    color: var(--Theme-Color-Component-Button-Default-Foreground-Pressed);
+    @media (forced-colors: active) {
+      border-color: Highlight;
+      color: ButtonText;
+    }
+  }
+  .secondary-button:focus-visible {
+    outline: 2px solid var(--Theme-Color-Foreground-Primary-750);
+    outline-offset: 1px;
+  }
+  .secondary-button:disabled {
+    background-color: var(--Theme-Color-Component-Button-Default-Background-Disabled);
+    color: var(--Theme-Color-Component-Button-Default-Foreground-Disabled);
+    cursor: default;
+    @media (forced-colors: active) {
+      border: 1px solid GrayText;
+    }
+  }
+  .links-row {
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    padding: 11px 0px;
+  }
+  .link {
+    color: var(--Theme-Color-Overlay-Black-60);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 450;
+    line-height: 16px;
+    @media (forced-colors: active) {
+      color: LinkText;
+    }
+  }
+  .link:hover {
+    text-decoration-line: underline;
+  }
+  </style>
+</head>
+
+<body>
+  <iframe id="underside-iframe-container" name="underside-iframe-container" frameborder="0" csp="base-uri 'self'; require-trusted-types-for 'script'; trusted-types default dompurify copilotPolicy; script-src 'strict-dynamic' 'nonce-required';" allow="clipboard-write;microphone;camera;clipboard-read;" src="https://copilot.microsoft.com/?ncedge=1">
+  >
+  </iframe>
+  <div class="overlay" id="overlay"></div>
+  <div class="dialog" id="consent-dialog">
+    <div class="dialog-container">
+      <div class="upper-container">
+        <div class="icons-container">
+          <img class="icon profile-icon" src="data:image/png;base64,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" alt="Chat Icon" width="40" height="40">
+          <div class="icon copilot-icon">
+            <svg class="copilot-svg" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+              <path d="M20.4937 3.97258C20.152 2.81253 19.087 2.01611 17.8777 2.01611L17.0761 2.01611C15.7541 2.01611 14.6225 2.96419 14.391 4.26571L13.0454 11.8299L13.4175 10.5354C13.7534 9.36664 14.8225 8.56149 16.0386 8.56149H20.6185L22.565 9.5355L24.4413 8.56149H23.8854C22.6761 8.56149 21.6111 7.76507 21.2693 6.60502L20.4937 3.97258Z" fill="url(#paint0_radial_3936_49027)"></path>
+              <path d="M8.78723 24.0481C9.12527 25.2137 10.1929 26.0157 11.4065 26.0157H13.099C14.5861 26.0157 15.7991 24.8244 15.8258 23.3375L15.9545 16.1841L15.5824 17.4906C15.2486 18.6625 14.1779 19.4708 12.9594 19.4708H8.33893L6.67053 18.3499L4.86426 19.4708H5.41111C6.62476 19.4708 7.69239 20.2728 8.03043 21.4385L8.78723 24.0481Z" fill="url(#paint1_radial_3936_49027)"></path>
+              <path d="M17.7508 2.01611H8.2723C5.56417 2.01611 3.93928 5.6759 2.85603 9.33568C1.57266 13.6716 -0.106661 19.4705 4.75172 19.4705H8.83856C10.0636 19.4705 11.1376 18.6566 11.4673 17.4768C12.1772 14.9372 13.4314 10.4708 14.4155 7.07456C14.9132 5.35668 15.3279 3.88132 15.9642 2.96256C16.321 2.44747 16.9156 2.01611 17.7508 2.01611Z" fill="url(#paint2_linear_3936_49027)"></path>
+              <path d="M17.7508 2.01611H8.2723C5.56417 2.01611 3.93928 5.6759 2.85603 9.33568C1.57266 13.6716 -0.106661 19.4705 4.75172 19.4705H8.83856C10.0636 19.4705 11.1376 18.6566 11.4673 17.4768C12.1772 14.9372 13.4314 10.4708 14.4155 7.07456C14.9132 5.35668 15.3279 3.88132 15.9642 2.96256C16.321 2.44747 16.9156 2.01611 17.7508 2.01611Z" fill="url(#paint3_linear_3936_49027)"></path>
+              <path d="M11.2493 26.0191H20.7277C23.4359 26.0191 25.0607 22.3587 26.144 18.6982C27.4274 14.3615 29.1067 8.56152 24.2483 8.56152H20.1616C18.9365 8.56152 17.8625 9.3755 17.5327 10.5554C16.8229 13.0954 15.5687 17.5628 14.5846 20.9597C14.0868 22.6779 13.6721 24.1536 13.0358 25.0725C12.679 25.5877 12.0844 26.0191 11.2493 26.0191Z" fill="url(#paint4_radial_3936_49027)"></path>
+              <path d="M11.2493 26.0191H20.7277C23.4359 26.0191 25.0607 22.3587 26.144 18.6982C27.4274 14.3615 29.1067 8.56152 24.2483 8.56152H20.1616C18.9365 8.56152 17.8625 9.3755 17.5327 10.5554C16.8229 13.0954 15.5687 17.5628 14.5846 20.9597C14.0868 22.6779 13.6721 24.1536 13.0358 25.0725C12.679 25.5877 12.0844 26.0191 11.2493 26.0191Z" fill="url(#paint5_linear_3936_49027)"></path>
+              <defs>
+              <radialGradient id="paint0_radial_3936_49027" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(22.7819 11.8941) rotate(-128.882) scale(10.2881 9.64442)">
+              <stop offset="0.0955758" stop-color="#00AEFF"></stop>
+              <stop offset="0.773185" stop-color="#2253CE"></stop>
+              <stop offset="1" stop-color="#0736C4"></stop>
+              </radialGradient>
+              <radialGradient id="paint1_radial_3936_49027" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(6.87626 19.4214) rotate(51.971) scale(9.41278 9.12039)">
+              <stop stop-color="#FFB657"></stop>
+              <stop offset="0.633728" stop-color="#FF5F3D"></stop>
+              <stop offset="0.923392" stop-color="#C02B3C"></stop>
+              </radialGradient>
+              <linearGradient id="paint2_linear_3936_49027" x1="7.70499" y1="4.13104" x2="9.1185" y2="20.1236" gradientUnits="userSpaceOnUse">
+              <stop offset="0.156162" stop-color="#0D91E1"></stop>
+              <stop offset="0.487484" stop-color="#52B471"></stop>
+              <stop offset="0.652394" stop-color="#98BD42"></stop>
+              <stop offset="0.937361" stop-color="#FFC800"></stop>
+              </linearGradient>
+              <linearGradient id="paint3_linear_3936_49027" x1="8.8869" y1="2.01611" x2="9.65896" y2="19.469" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#3DCBFF"></stop>
+              <stop offset="0.246674" stop-color="#0588F7" stop-opacity="0"></stop>
+              </linearGradient>
+              <radialGradient id="paint4_radial_3936_49027" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(24.7352 6.8523) rotate(108.88) scale(23.1413 27.2407)">
+              <stop offset="0.0661714" stop-color="#8C48FF"></stop>
+              <stop offset="0.5" stop-color="#F2598A"></stop>
+              <stop offset="0.895833" stop-color="#FFB152"></stop>
+              </radialGradient>
+              <linearGradient id="paint5_linear_3936_49027" x1="25.484" y1="7.4957" x2="25.4739" y2="12.2505" gradientUnits="userSpaceOnUse">
+              <stop offset="0.0581535" stop-color="#F8ADFA"></stop>
+              <stop offset="0.708063" stop-color="#A86EDD" stop-opacity="0"></stop>
+              </linearGradient>
+              </defs>
+              </svg>
+          </div>
+        </div>
+        <div class="header-container">
+          <h2>Let me browse the web for you</h2>
+          <div class="description">I'll browse and complete tasks for you, using your profile infor for quicker completion.</div>
+        </div>
+        <div id="profile-consent-toggle-row" class="agent-toggle-container">
+          <label class="toggle-row">
+            <div class="label-wrapper" id="profile-toggle-label">
+              <div class="toggle-label">Share profile info (Suggested)</div>
+              <div class="toggle-sublabel">Allow Copilot to quickly login and complete actions faster for you using personal info you’ve saved on Edge.</div>
+            </div>
+            <div class="toggle-wrapper">
+              <input id="profile-toggle-input" type="checkbox" :checked="" class="toggle-switch">
+              <span class="toggle-background"></span>
+              <span class="toggle-circle"></span>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="lower-container">
+        <button id="save-button" class="primary-button base-button">Allow</button>
+        <button id="cancel-button" class="secondary-button base-button">Don't allow</button>
+        <div class="links-row">
+          <a class="link" title="i18n{learn_more_link}" href="https://go.microsoft.com/fwlink/?LinkId=521839" target="_blank" rel="noopener noreferrer">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/base-error-reporting.js"></script>
+  <script type="module" src="./index.js"></script>
+  
+
+
+
+</body></html>
